@@ -1,0 +1,110 @@
+#N canvas 836 100 549 636 10;
+#X obj 27 -96 adc~;
+#X obj 43 -59 vsl 15 128 0 127 0 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 800 1;
+#X obj 28 138 *~;
+#X obj 28 169 fiddle~ 1024 1 20 3;
+#X obj 193 155 tabwrite~ audio-in;
+#X obj 193 74 loadbang;
+#X obj 193 129 metro 100;
+#X obj 115 233 int;
+#X obj 253 233 int;
+#X obj 115 295 pack 0 100;
+#X obj 253 295 pack 0 100;
+#X obj 115 326 line;
+#X obj 253 326 line;
+#X obj 28 266 vsl 15 128 0 127 0 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 7209 1;
+#X obj 193 105 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X obj 174 230 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X floatatom 253 263 5 0 0 0 - - -;
+#X floatatom 115 263 5 0 0 0 - - -;
+#X floatatom 115 363 5 0 0 0 - - -;
+#X floatatom 253 363 5 0 0 0 - - -;
+#X msg 429 133 \; pd dsp 0;
+#X msg 428 91 \; pd dsp 1;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array audio-in 100 float 3;
+#A 0 7.16168e-006 8.54518e-006 1.04984e-005 1.19633e-005 1.28585e-005
+1.25329e-005 1.1475e-005 9.84731e-006 8.70795e-006 8.30103e-006 8.78933e-006
+9.76592e-006 1.04984e-005 1.06611e-005 1.00101e-005 9.03348e-006 7.89412e-006
+6.99891e-006 6.91753e-006 7.24306e-006 7.48721e-006 8.05689e-006 7.9755e-006
+7.48721e-006 6.83615e-006 6.02232e-006 5.37126e-006 4.96434e-006 4.88296e-006
+4.96434e-006 5.20849e-006 5.28987e-006 5.37126e-006 5.28987e-006 5.12711e-006
+5.04573e-006 4.80158e-006 4.88296e-006 5.04573e-006 5.20849e-006 5.53402e-006
+5.53402e-006 5.61541e-006 5.53402e-006 5.37126e-006 5.12711e-006 4.63881e-006
+3.90637e-006 2.84839e-006 1.79042e-006 1.13936e-006 8.13827e-007 1.05797e-006
+2.11595e-006 3.41807e-006 5.04573e-006 6.02232e-006 6.26647e-006 5.53402e-006
+3.82499e-006 1.8718e-006 8.13827e-008 -1.05797e-006 -1.30212e-006 -8.9521e-007
+-3.25531e-007 3.25531e-007 4.06913e-007 1.62765e-007 -7.32444e-007
+-1.79042e-006 -2.52286e-006 -2.60425e-006 -2.27872e-006 -1.62765e-006
+-8.13827e-007 -3.25531e-007 -1.62765e-007 -4.06913e-007 -9.76592e-007
+-1.95318e-006 -2.84839e-006 -3.66222e-006 -4.39467e-006 -4.96434e-006
+-5.37126e-006 -5.53402e-006 -5.45264e-006 -5.12711e-006 -4.55743e-006
+-4.06913e-006 -3.98775e-006 -4.31328e-006 -5.04573e-006 -5.94094e-006
+-6.91753e-006 -7.81274e-006 -8.4638e-006 -8.9521e-006 -9.44039e-006
+;
+#X coords 0 1 99 -1 200 140 1;
+#X restore 283 -98 graph;
+#X obj 143 417 mtof;
+#X floatatom 188 363 5 0 0 0 - - -;
+#N canvas 934 478 506 361 sendOSC 0;
+#X obj 223 257 sendOSC;
+#X obj 167 24 inlet;
+#X obj 19 87 loadbang;
+#X msg 98 161 disconnect;
+#X obj 218 24 inlet;
+#X obj 218 68 t b f;
+#X obj 195 109 pack;
+#X obj 195 146 t b list b;
+#X msg 195 211 ];
+#X msg 304 212 [;
+#X text 165 2 pitch;
+#X text 211 2 frequency;
+#X msg 19 133 connect localhost 7000;
+#X msg 223 181 send /pitch \$1;
+#X connect 1 0 6 0;
+#X connect 2 0 12 0;
+#X connect 3 0 0 0;
+#X connect 4 0 5 0;
+#X connect 5 0 6 0;
+#X connect 5 1 6 1;
+#X connect 6 0 7 0;
+#X connect 7 0 8 0;
+#X connect 7 1 13 0;
+#X connect 7 2 9 0;
+#X connect 8 0 0 0;
+#X connect 9 0 0 0;
+#X connect 12 0 0 0;
+#X connect 13 0 0 0;
+#X restore 124 450 pd sendOSC;
+#X text 105 384 pitch;
+#X text 177 384 frequency;
+#X text 246 384 amplitude;
+#X obj 43 99 / 3000;
+#X connect 0 0 2 0;
+#X connect 1 0 29 0;
+#X connect 2 0 3 0;
+#X connect 2 0 4 0;
+#X connect 3 0 13 0;
+#X connect 3 0 7 0;
+#X connect 3 1 15 0;
+#X connect 3 3 8 0;
+#X connect 5 0 14 0;
+#X connect 6 0 4 0;
+#X connect 7 0 17 0;
+#X connect 8 0 16 0;
+#X connect 9 0 11 0;
+#X connect 10 0 12 0;
+#X connect 11 0 18 0;
+#X connect 12 0 19 0;
+#X connect 14 0 6 0;
+#X connect 16 0 10 0;
+#X connect 17 0 9 0;
+#X connect 17 0 25 0;
+#X connect 18 0 23 0;
+#X connect 23 0 24 0;
+#X connect 24 0 25 1;
+#X connect 29 0 2 1;
