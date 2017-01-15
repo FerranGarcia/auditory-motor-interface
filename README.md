@@ -11,7 +11,7 @@ A functional approach of the auditory-motor interface, allows a humanoid robot p
 
 <br>
 
-# Requirements:
+## Requirements:
 - PureData
 - OSC
 - YARP
